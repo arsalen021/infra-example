@@ -24,6 +24,7 @@ resource "google_project_iam_member" "jenkins" {
 }
 
 resource "google_dns_managed_zone_iam_member" "member" {
+  depends_on = [ google_dns_managed_zone.personal ]
   project      = var.project
   managed_zone = google_dns_managed_zone.personal.name
   role         = "roles/dns.admin"
@@ -31,6 +32,7 @@ resource "google_dns_managed_zone_iam_member" "member" {
 }
 
 resource "google_artifact_registry_repository_iam_member" "member" {
+  depends_on = [ google_artifact_registry_repository.docker_dev ]
   project      = var.project
   repository = google_artifact_registry_repository.docker_dev.name
   role         = "roles/artifactregistry.repoAdmin"
