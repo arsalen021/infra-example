@@ -13,3 +13,6 @@ ingress:
     - secretName: app-tls
       hosts:
         - spring-boot-react-example.personal.arsalen.xyz
+
+livenessProbe: null
+readinessProbe: null

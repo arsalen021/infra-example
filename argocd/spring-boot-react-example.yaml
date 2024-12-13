@@ -17,9 +17,9 @@ spec:
         valueFiles:
         - $values/argocd/clusters/development/spring-boot-react-example/values.yaml
   source:
-    chart: spring-boot-react-example
-    repoURL: 'europe-west1-docker.pkg.dev/assignment-444117/helm-development-repository'
-    targetRevision: 0.1.0
+    repoURL: https://github.com/arsalen021/infra-example.git
+    targetRevision: HEAD
+    path: argocd
   destination:
     name: "in-cluster"
     namespace: spring-boot-react-example
