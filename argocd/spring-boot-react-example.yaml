@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: spring-boot-react-example
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/arsalen021/infra-example.git
+      targetRevision: HEAD
+      ref: values
+      path: argocd
+    - repoURL: 'europe-west1-docker.pkg.dev/assignment-444117/helm-development-repository'
+      targetRevision: 0.1.0
+      chart: spring-boot-react-example
+      helm:
+        releaseName: spring-boot-react-example
+        valueFiles:
+        - $values/argocd/clusters/development/spring-boot-react-example/values.yaml
+  source:
+    chart: spring-boot-react-example
+    repoURL: 'europe-west1-docker.pkg.dev/assignment-444117/helm-development-repository'
+    targetRevision: 0.1.0
+  destination:
+    name: "in-cluster"
+    namespace: spring-boot-react-example
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
